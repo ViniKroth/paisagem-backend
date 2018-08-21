@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "senha",
+    "database": "nodemodel",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "senha",
+    "database": "nodemodel",
+    "host": "database",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "senha",
+    "database": "nodemodel",
+    "host": "database",
+    "dialect": "mysql"
+  }
+}
