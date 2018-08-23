@@ -1,4 +1,6 @@
-INSERT INTO `nodemodel`.`Users` (`name`, `username`, `email`, `password`, `salt`, `createdAt`,  `updatedAt`)
+CREATE DATABASE `ages-paisagem`;
+
+INSERT INTO `ages-paisagem`.`Users` (`name`, `username`, `email`, `password`, `salt`, `createdAt`,  `updatedAt`)
   VALUES (
     'Usuário de Teste',
     'usuario',
