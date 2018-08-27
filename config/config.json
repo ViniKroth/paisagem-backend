@@ -2,21 +2,21 @@
   "development": {
     "username": "root",
     "password": "senha",
-    "database": "nodemodel",
+    "database": "ages-paisagem",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "senha",
-    "database": "nodemodel",
+    "database": "ages-paisagem",
     "host": "database",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": "senha",
-    "database": "nodemodel",
+    "database": "ages-paisagem",
     "host": "database",
     "dialect": "mysql"
   }
