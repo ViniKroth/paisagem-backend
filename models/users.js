@@ -5,18 +5,18 @@ module.exports = (sequelize, DataType) => {
             primaryKey: true,
             autoIncrement: true
         },
-        name: {
+        nome: {
             type: DataType.STRING
         },
-        username: {
+        /*username: {
             type: DataType.STRING,
             required: true,
             unique: true
-        },
+        },*/
         email: {
             type: DataType.STRING
         },
-        password: {
+        senha: {
             type: DataType.STRING,
             allowNull: false,
             validate: {
