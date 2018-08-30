@@ -134,6 +134,7 @@ function createWhereClause(query) {
 
 module.exports.fetchEspecies   = fetchEspecies
 module.exports.findByID     = findByID
+module.exports.findByNomePop = findByNomePop
 module.exports.addEspecie     = addEspecie
 module.exports.deleteEspecieBy = deleteEspecieBy
 module.exports.updateEspecie   = updateEspecie
