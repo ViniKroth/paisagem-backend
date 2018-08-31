@@ -24,6 +24,12 @@ module.exports = (sequelize, DataType) => {
         populacao: {
             type: DataType.STRING
         },
+        foto: {
+            type: DataType.STRING
+        },
+        desenho: {
+            type: DataType.STRING
+        },
     })
 
     return Especies
