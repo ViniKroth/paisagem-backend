@@ -1,7 +1,7 @@
 const constants = require('../config/contants')
 const db        = require('../models')
 
-const usuarios = db.sequelize.model('Usuarios')
+const usuarios = db.sequelize.model('Users')
 
 /*
  * Fetch a specific Usuarios page
