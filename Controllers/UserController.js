@@ -1,5 +1,5 @@
 const constants = require('../config/contants')
-const DAO       = require('../DAO/UsersDAO')
+const DAO       = require('../DAO/UsuariosDAO')
 const sha256    = require('sha256')
 
 class UserController {
