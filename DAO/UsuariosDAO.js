@@ -1,7 +1,7 @@
 const constants = require('../config/contants')
 const db        = require('../models')
 
-const usuarios = db.sequelize.model('Usuarios')
+const usuarios = db.sequelize.model('Users')
 
 /*
  * Fetch a specific Usuarios page
@@ -120,7 +120,7 @@ function createWhereClause(query) {
         query.$or = [
             { id_usuario:       { like: `%${query.contains}%` }},
             { nome:     { like: `%${query.contains}%` }},
-            /*{ username: { like: `%${query.contains}%` }},*/
+            { username: { like: `%${query.contains}%` }},
             { email:    { like: `%${query.contains}%` }}
         ]
     }
