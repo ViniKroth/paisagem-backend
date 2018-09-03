@@ -120,7 +120,7 @@ function createWhereClause(query) {
         query.$or = [
             { id_usuario:       { like: `%${query.contains}%` }},
             { nome:     { like: `%${query.contains}%` }},
-            /*{ username: { like: `%${query.contains}%` }},*/
+            { username: { like: `%${query.contains}%` }},
             { email:    { like: `%${query.contains}%` }}
         ]
     }
