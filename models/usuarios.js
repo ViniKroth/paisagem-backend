@@ -8,11 +8,11 @@ module.exports = (sequelize, DataType) => {
         nome: {
             type: DataType.STRING
         },
-        /*username: {
+        username: {
             type: DataType.STRING,
             required: true,
             unique: true
-        },*/
+        },
         email: {
             type: DataType.STRING
         },
