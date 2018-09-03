@@ -1,19 +1,19 @@
 const constants = require('../config/contants')
-const db        = require('../models/index')
+const db        = require('../models')
 
-const users = db.sequelize.model('Users')
+const usuarios = db.sequelize.model('Usuarios')
 
 /*
- * Fetch a specific users page
+ * Fetch a specific Usuarios page
  */
-function fetchUsers(orderQuery, whereQuery, callback) {
-    users.findAll({
+function fetchUsuarios(orderQuery, whereQuery, callback) {
+    usuarios.findAll({
         attributes: { exclude: ['password', 'salt'] },
         order:  (createOrderClause(orderQuery)),
         where:  (createWhereClause(whereQuery))
     })
-        .then(users => {
-            callback(null, users)
+        .then(usuarios => {
+            callback(null, usuarios)
         })
         .catch(error => {
             let errorObj = { statusDesc: error, statusCode: constants.errorCodeSequelize }
@@ -21,13 +21,13 @@ function fetchUsers(orderQuery, whereQuery, callback) {
         })
 }
 
-function findByID(id, callback) {
-    users.findById( id, {
+function findByID(id_usuario, callback) {
+    usuarios.findById( id_usuario, {
         attributes: { exclude: ['password', 'salt'] }
     })
-        .then(user => {
-            if(user) {
-                return callback(null, user)
+        .then(usuario => {
+            if(usuario) {
+                return callback(null, usuario)
             } else {
                 let errorObj = { statusDesc: constants.valueNotFound, statusCode: constants.errorCodeSequelize }
                 return callback(errorObj, null)
@@ -39,13 +39,31 @@ function findByID(id, callback) {
         })
 }
 
-function addUser(user, callback) {
-    users.create(user)
-        .then(newUser => {
-            delete newUser.dataValues.password
-            delete newUser.dataValues.salt
+function findByNome(nome, callback) {
+    usuarios.findById( nome, {
+        attributes: { exclude: ['password', 'salt'] }
+    })
+        .then(usuario => {
+            if(usuario) {
+                return callback(null, usuario)
+            } else {
+                let errorObj = { statusDesc: constants.valueNotFound, statusCode: constants.errorCodeSequelize }
+                return callback(errorObj, null)
+            }
+        })
+        .catch(error => {
+            let errorObj = { statusDesc: error, statusCode: constants.errorCodeSequelize }
+            return callback(errorObj, null)
+        })
+}
+
+function addUsuario(usuario, callback) {
+    usuarios.create(usuario)
+        .then(newUsuario => {
+            delete newusuario.dataValues.password
+            delete newusuario.dataValues.salt
             
-            callback(null, newUser)
+            callback(null, newusuario)
         })
         .catch(error => {
             let errorObj = { statusDesc: error, statusCode: constants.errorCodeSequelize }
@@ -53,14 +71,14 @@ function addUser(user, callback) {
         })
 }
 
-function updateUser(newUserData, callback) {
-    users.findById(newUserData.id)
-        .then(user => {
-            if(user == null) {
+function updateUsuario(newUsuarioData, callback) {
+    usuarios.findById(newUsuarioData.id)
+        .then(usuario => {
+            if(usuario == null) {
                 let errorObj = { statusDesc: constants.valueNotFound, statusCode: constants.errorCodeSequelize }
                 callback(errorObj, null)
             } else {
-                user.update(newUserData, {
+                usuario.update(newUsuarioData, {
                     returning: true
                 })
                     .then(instance => {
@@ -74,14 +92,14 @@ function updateUser(newUserData, callback) {
         })
 }
 
-function deleteUserBy(id, callback) {
-    users.findById(id)
-        .then(user => {
-            if(user == null) {
+function deleteUsuarioBy(id, callback) {
+    usuarios.findById(id)
+        .then(usuario => {
+            if(usuario == null) {
                 let errorObj = { statusDesc: constants.valueNotFound, statusCode: constants.errorCodeSequelize }
                 callback(errorObj, null)
             } else {
-                user.destroy({ returning: true })
+                usuario.destroy({ returning: true })
                     .then(instance => {
                         callback(null, instance)
                     })
@@ -100,9 +118,9 @@ function createOrderClause(query) {
 function createWhereClause(query) {
     if(query.contains !== undefined){
         query.$or = [
-            { id:       { like: `%${query.contains}%` }},
-            { name:     { like: `%${query.contains}%` }},
-            { username: { like: `%${query.contains}%` }},
+            { id_usuario:       { like: `%${query.contains}%` }},
+            { nome:     { like: `%${query.contains}%` }},
+            /*{ username: { like: `%${query.contains}%` }},*/
             { email:    { like: `%${query.contains}%` }}
         ]
     }
@@ -111,8 +129,9 @@ function createWhereClause(query) {
     return query
 }
 
-module.exports.fetchUsers   = fetchUsers
+module.exports.fetchUsuarios   = fetchUsuarios
 module.exports.findByID     = findByID
-module.exports.addUser      = addUser
-module.exports.deleteUserBy = deleteUserBy
-module.exports.updateUser   = updateUser
+module.exports.findByNome = findByNome
+module.exports.addUsuario      = addUsuario
+module.exports.deleteUsuarioBy = deleteUsuarioBy
+module.exports.updateUsuario   = updateUsuario
