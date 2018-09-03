@@ -1,13 +1,12 @@
 module.exports = (sequelize, DataType) => {
     var Especies = sequelize.define("Especies", {
-        id_especies: {
+        id_especie: {
             type: DataType.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
         nome_cientifico: {
             type: DataType.STRING,
-            primaryKey: true
         },
         nome_popular: {
             type: DataType.STRING
@@ -29,6 +28,21 @@ module.exports = (sequelize, DataType) => {
         },
         desenho: {
             type: DataType.STRING
+        },
+        qtd_individuos: {
+            type: DataType.INTEGER,
+        },
+        outono: {
+            type: DataType.BOOLEAN
+        },
+        verao: {
+            type: DataType.BOOLEAN
+        },
+        primavera: {
+            type: DataType.BOOLEAN
+        },
+        inverno: {
+            type: DataType.BOOLEAN
         },
     })
 
