@@ -5,6 +5,7 @@ const cors = require('cors')
 
 const loginRouter = require('./routes/login')
 const usersRouter = require('./routes/users')
+const especiesRouter = require('./routes/especie')
 
 const TokenManager = require('./Helpers/AuthManager')
 
@@ -18,6 +19,7 @@ function setupServer() {
 
     app.use(cors())
     app.use(bodyParser.json())
+    app.use('/api/especie', especiesRouter)
     app.use('/api/login', loginRouter)
     app.use('/api/users',
         //TokenManager.ensureUserToken,
