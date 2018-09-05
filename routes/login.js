@@ -1,13 +1,16 @@
-const express       = require('express')
-var ResponseHelper  = require('../Helpers/ResponseHelper')
-var LoginController = require('../Controllers/LoginController')
+const express = require("express");
+var ResponseHelper = require("../Helpers/ResponseHelper");
+var LoginController = require("../Controllers/LoginController");
+var AuthManager = require("./../Helpers/AuthManager");
 
-const routerLogin = express.Router()
+const routerLogin = express.Router();
 
-routerLogin.post('/', function (req, res) {
-    LoginController.login(req.body.username, req.body.password, (error, data) => {
-        res.json(ResponseHelper.createResponse(error, data, true))
-    })
-})
+routerLogin.post("/", function(req, res) {
+  LoginController.login(req.body.username, req.body.password, (error, data) => {
+    res.json(ResponseHelper.createResponse(error, data, true));
+  });
+});
 
-module.exports = routerLogin
+routerLogin.get("/token", AuthManager.ensureUserToken);
+
+module.exports = routerLogin;
