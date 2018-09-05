@@ -44,7 +44,7 @@ class UserController {
       constants.maxRandomNumber
     );
     newUserData.salt = salt;
-    newUserData.password = sha256(newUserData.password + salt);
+    newUserData.senha = sha256(newUserData.senha + salt);
     DAO.addUser(newUserData, (error, data) => {
       if (!error) {
         return callback(null, data);
