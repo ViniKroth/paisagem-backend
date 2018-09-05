@@ -22,6 +22,15 @@ module.exports = (sequelize, DataType) => {
         cargo: {
             type: DataType.STRING
         },
+        formacao: {
+            type: DataType.STRING
+        },
+        profissao: {
+            type: DataType.STRING
+        },
+        especialidade: {
+            type: DataType.STRING
+        },
         senha: {
             type: DataType.STRING,
             allowNull: false,

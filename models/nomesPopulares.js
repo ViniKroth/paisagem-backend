@@ -7,8 +7,10 @@ module.exports = (sequelize, DataType) => {
         },
         id_especie: {
             type: DataType.INTEGER,
-            // references: 'especies',
-            // referencesKey: 'id_especie'
+            references: {
+                model: 'Especies',
+                key: 'id_especie'
+            }
         },
         descricao: {
             type: DataType.STRING

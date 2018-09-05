@@ -1,10 +1,10 @@
 module.exports = (sequelize, DataType) => {
-    var Familias = sequelize.define("Familias", {
+    var familias = sequelize.define("Familias", {
         id_familia: {
             type: DataType.INTEGER,
             primaryKey: true,
             autoIncrement: true
-        },
+        },      
         nome: {
             type: DataType.STRING
         },
@@ -13,5 +13,5 @@ module.exports = (sequelize, DataType) => {
         },
     })
 
-    return Familias
+    return familias
 }

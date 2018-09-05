@@ -1,10 +1,24 @@
 module.exports = (sequelize, DataType) => {
-    var Especies = sequelize.define("Especies", {
+    var especies = sequelize.define("Especies", {
         id_especie: {
             type: DataType.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
+        id_familia: {
+            type: DataType.INTEGER,
+            references: {
+                model: 'Familias',
+                key: 'id_familia'
+            }
+        }, 
+        id_classificacao: {
+            type: DataType.INTEGER,
+            references: {
+                model: 'Classificacoes',
+                key: 'id_classificacao'
+            }
+        }, 
         nome_cientifico: {
             type: DataType.STRING,
         },
@@ -46,5 +60,5 @@ module.exports = (sequelize, DataType) => {
         },
     })
 
-    return Especies
+    return especies
 }

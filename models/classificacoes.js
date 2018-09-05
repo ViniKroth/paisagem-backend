@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataType) => {
-  var Classificacoes = sequelize.define("Classificacoes", {
+  var classificacoes = sequelize.define("Classificacoes", {
     id_classificacao: {
       type: DataType.INTEGER,
       primaryKey: true,
@@ -13,5 +13,5 @@ module.exports = (sequelize, DataType) => {
     }
   });
 
-  return Classificacoes;
+  return classificacoes;
 };
