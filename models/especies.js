@@ -7,27 +7,42 @@ module.exports = (sequelize, DataType) => {
         },
         id_familia: {
             type: DataType.INTEGER,
-            references: {
+            /*references: {
                 model: 'Familias',
                 key: 'id_familia'
-            }
+            }*/
         }, 
         id_classificacao: {
             type: DataType.INTEGER,
-            references: {
+            /*references: {
                 model: 'Classificacoes',
                 key: 'id_classificacao'
-            }
+            }*/
         }, 
         nome_cientifico: {
+            type: DataType.STRING,
+        },
+        floracao: {
+            type: DataType.STRING,
+        },
+        folhagem: {
+            type: DataType.STRING,
+        },
+        origem: {
             type: DataType.STRING,
         },
         nome_popular: {
             type: DataType.STRING
         },
-        naturalidade: {
-            type: DataType.STRING
+        potencialarq: {
+            type: DataType.STRING,
         },
+        potencialpaisag: {
+            type: DataType.STRING,
+        },
+        /*naturalidade: {
+            type: DataType.STRING
+        },*/
         porte: {
             type: DataType.STRING
         },
