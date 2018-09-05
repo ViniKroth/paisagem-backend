@@ -1,19 +1,19 @@
 const constants = require('../config/contants')
-const db        = require('../models')
+const db        = require('../models/index')
 
-const usuarios = db.sequelize.model('Users')
+const especies = db.sequelize.model('Especies')
 
 /*
- * Fetch a specific Usuarios page
+ * Fetch a specific especies page
  */
-function fetchUsuarios(orderQuery, whereQuery, callback) {
-    usuarios.findAll({
+function fetchEspecies(orderQuery, whereQuery, callback) {
+    especies.findAll({
         attributes: { exclude: ['password', 'salt'] },
         order:  (createOrderClause(orderQuery)),
         where:  (createWhereClause(whereQuery))
     })
-        .then(usuarios => {
-            callback(null, usuarios)
+        .then(especies => {
+            callback(null, especies)
         })
         .catch(error => {
             let errorObj = { statusDesc: error, statusCode: constants.errorCodeSequelize }
@@ -21,13 +21,13 @@ function fetchUsuarios(orderQuery, whereQuery, callback) {
         })
 }
 
-function findByID(id_usuario, callback) {
-    usuarios.findById( id_usuario, {
-        attributes: { exclude: ['password', 'salt'] }
+function findByID(id_especie, callback) {
+    especies.findById( id_especie, {
+        attributes: { }
     })
-        .then(usuario => {
-            if(usuario) {
-                return callback(null, usuario)
+        .then(especie => {
+            if(especie) {
+                return callback(null, especie)
             } else {
                 let errorObj = { statusDesc: constants.valueNotFound, statusCode: constants.errorCodeSequelize }
                 return callback(errorObj, null)
@@ -39,13 +39,13 @@ function findByID(id_usuario, callback) {
         })
 }
 
-function findByNome(nome, callback) {
-    usuarios.findById( nome, {
-        attributes: { exclude: ['password', 'salt'] }
+function findByNomePop(nome_popular, callback) {
+    especies.findById( nome_popular, {
+        attributes: { }
     })
-        .then(usuario => {
-            if(usuario) {
-                return callback(null, usuario)
+        .then(especie => {
+            if(especie) {
+                return callback(null, especie)
             } else {
                 let errorObj = { statusDesc: constants.valueNotFound, statusCode: constants.errorCodeSequelize }
                 return callback(errorObj, null)
@@ -57,13 +57,13 @@ function findByNome(nome, callback) {
         })
 }
 
-function addUsuario(usuario, callback) {
-    usuarios.create(usuario)
-        .then(newUsuario => {
-            delete newusuario.dataValues.password
-            delete newusuario.dataValues.salt
+function addEspecie(especie, callback) {
+    especies.create(especie)
+        .then(newEspecie => {
+            delete newEspecie.dataValues.password
+            delete newEspecie.dataValues.salt
             
-            callback(null, newusuario)
+            callback(null, newEspecie)
         })
         .catch(error => {
             let errorObj = { statusDesc: error, statusCode: constants.errorCodeSequelize }
@@ -71,14 +71,14 @@ function addUsuario(usuario, callback) {
         })
 }
 
-function updateUsuario(newUsuarioData, callback) {
-    usuarios.findById(newUsuarioData.id)
-        .then(usuario => {
-            if(usuario == null) {
+function updateEspecie(newEspecieData, callback) {
+    especies.findById(newEspecieData.id_especie)
+        .then(especie => {
+            if(especie == null) {
                 let errorObj = { statusDesc: constants.valueNotFound, statusCode: constants.errorCodeSequelize }
                 callback(errorObj, null)
             } else {
-                usuario.update(newUsuarioData, {
+                especie.update(newEspecieData, {
                     returning: true
                 })
                     .then(instance => {
@@ -92,14 +92,14 @@ function updateUsuario(newUsuarioData, callback) {
         })
 }
 
-function deleteUsuarioBy(id, callback) {
-    usuarios.findById(id)
-        .then(usuario => {
-            if(usuario == null) {
+function deleteEspecieBy(id_especie, callback) {
+    especies.findById(id_especie)
+        .then(especie => {
+            if(especie == null) {
                 let errorObj = { statusDesc: constants.valueNotFound, statusCode: constants.errorCodeSequelize }
                 callback(errorObj, null)
             } else {
-                usuario.destroy({ returning: true })
+                especie.destroy({ returning: true })
                     .then(instance => {
                         callback(null, instance)
                     })
@@ -118,10 +118,13 @@ function createOrderClause(query) {
 function createWhereClause(query) {
     if(query.contains !== undefined){
         query.$or = [
-            { id_usuario:       { like: `%${query.contains}%` }},
-            { nome:     { like: `%${query.contains}%` }},
-            { username: { like: `%${query.contains}%` }},
-            { email:    { like: `%${query.contains}%` }}
+            { id_especie:       { like: `%${query.contains}%` }},
+            { nome_cientifico:     { like: `%${query.contains}%` }},
+            { nome_popular: { like: `%${query.contains}%` }},
+            { naturalidade:    { like: `%${query.contains}%` }},
+            { porte:    { like: `%${query.contains}%` }},
+            { genero:    { like: `%${query.contains}%` }},
+            { populacao:    { like: `%${query.contains}%` }}
         ]
     }
     delete query.contains
@@ -129,9 +132,9 @@ function createWhereClause(query) {
     return query
 }
 
-module.exports.fetchUsuarios   = fetchUsuarios
+module.exports.fetchEspecies   = fetchEspecies
 module.exports.findByID     = findByID
-module.exports.findByNome = findByNome
-module.exports.addUsuario      = addUsuario
-module.exports.deleteUsuarioBy = deleteUsuarioBy
-module.exports.updateUsuario   = updateUsuario
+module.exports.findByNomePop = findByNomePop
+module.exports.addEspecie     = addEspecie
+module.exports.deleteEspecieBy = deleteEspecieBy
+module.exports.updateEspecie   = updateEspecie
