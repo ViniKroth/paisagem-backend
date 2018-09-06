@@ -1,7 +1,6 @@
 const express = require("express");
 var ResponseHelper = require("../Helpers/ResponseHelper");
 var LoginController = require("../Controllers/LoginController");
-var AuthManager = require("./../Helpers/AuthManager");
 
 const routerLogin = express.Router();
 
@@ -11,6 +10,10 @@ routerLogin.post("/", function(req, res) {
   });
 });
 
-routerLogin.get("/token", AuthManager.ensureUserToken);
+routerLogin.get("/token", function(req, res) {
+  LoginController.checkToken(req, res, (error, data) => {
+    res.json(ResponseHelper.createResponse(error, data, true));
+  });
+});
 
 module.exports = routerLogin;
