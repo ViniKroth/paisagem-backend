@@ -1,6 +1,6 @@
 const constants = require("../config/contants");
 const db = require("../models");
-
+const Op = Sequelize.Op;
 const nomesPopulares = db.sequelize.model("nomesPopulares");
 
 /*
@@ -24,10 +24,27 @@ function fetchNomesPopulares(orderQuery, whereQuery, callback) {
     });
 }
 
-function GetByEspecie(id, callback) {
+function GetByEspecie(id_especie, callback) {
   nomesPopulares
     .findAll({
-      where: {id_especie: id}
+      where: {id_especie: id_especie}
+    })
+    .then(nomesPopulares => {
+      callback(null, nomesPopulares);
+    })
+    .catch(error => {
+      let errorObj = {
+        statusDesc: error,
+        statusCode: constants.errorCodeSequelize
+      };
+      callback(errorObj, null);
+    });
+}
+
+function GetByNome(nome, callback) {
+  nomesPopulares
+    .findAll({
+      where: {nome: {[Op.like] : '%' + nome + '%'}}
     })
     .then(nomesPopulares => {
       callback(null, nomesPopulares);
@@ -148,7 +165,7 @@ function createWhereClause(query) {
     query.$or = [
       { id_nomepopular: { like: `%${query.contains}%` } },
       { id_especie: { like: `%${query.contains}%` } },
-      { descricao: { like: `%${query.contains}%` } }
+      { nome: { like: `%${query.contains}%` } }
     ];
   }
   delete query.contains;

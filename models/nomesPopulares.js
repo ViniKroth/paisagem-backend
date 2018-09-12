@@ -12,7 +12,7 @@ module.exports = (sequelize, DataType) => {
                 key: 'id_especie'
             }
         },
-        descricao: {
+        nome: {
             type: DataType.STRING
         },
     })
