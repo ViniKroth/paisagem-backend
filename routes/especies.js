@@ -6,4 +6,7 @@ const routerEspecie = express.Router();
 
 routerEspecie.post("/", especieController.addEspecie);
 
+routerEspecie.get("/:id", (req, res) => {
+    especieController.getEspecieByID(req, res);
+})
 module.exports = routerEspecie;
