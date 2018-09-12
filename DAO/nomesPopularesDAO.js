@@ -1,19 +1,19 @@
 const constants = require("../config/contants");
-const db = require("../models/index");
+const db = require("../models");
 
-const especies = db.sequelize.model("Especies");
+const nomesPopulares = db.sequelize.model("nomesPopulares");
 
 /*
- * Fetch a specific especies page
+ * Fetch a specific nomepopulares page
  */
-function fetchEspecies(orderQuery, whereQuery, callback) {
-  especies
+function fetchNomesPopulares(orderQuery, whereQuery, callback) {
+  nomesPopulares
     .findAll({
       order: createOrderClause(orderQuery),
       where: createWhereClause(whereQuery)
     })
-    .then(especies => {
-      callback(null, especies);
+    .then(nomesPopulares => {
+      callback(null, nomesPopulares);
     })
     .catch(error => {
       let errorObj = {
@@ -24,14 +24,31 @@ function fetchEspecies(orderQuery, whereQuery, callback) {
     });
 }
 
-function findByID(id_especie, callback) {
-  especies
-    .findById(id_especie, {
+function GetByEspecie(id, callback) {
+  nomesPopulares
+    .findAll({
+      where: {id_especie: id}
+    })
+    .then(nomesPopulares => {
+      callback(null, nomesPopulares);
+    })
+    .catch(error => {
+      let errorObj = {
+        statusDesc: error,
+        statusCode: constants.errorCodeSequelize
+      };
+      callback(errorObj, null);
+    });
+}
+
+function findByID(id_nomepopular, callback) {
+  nomesPopulares
+    .findById(id_nomepopular, {
       attributes: {}
     })
-    .then(especie => {
-      if (especie) {
-        return callback(null, especie);
+    .then(nomepopular => {
+      if (nomepopular) {
+        return callback(null, nomepopular);
       } else {
         let errorObj = {
           statusDesc: constants.valueNotFound,
@@ -49,36 +66,11 @@ function findByID(id_especie, callback) {
     });
 }
 
-function findByNomePop(nome_popular, callback) {
-  especies
-    .findById(nome_popular, {
-      attributes: {}
-    })
-    .then(especie => {
-      if (especie) {
-        return callback(null, especie);
-      } else {
-        let errorObj = {
-          statusDesc: constants.valueNotFound,
-          statusCode: constants.errorCodeSequelize
-        };
-        return callback(errorObj, null);
-      }
-    })
-    .catch(error => {
-      let errorObj = {
-        statusDesc: error,
-        statusCode: constants.errorCodeSequelize
-      };
-      return callback(errorObj, null);
-    });
-}
-
-function addEspecie(especie, callback) {
-  especies
-    .create(especie)
-    .then(newEspecie => {
-      callback(null, newEspecie);
+function addNomePopular(nomepopular, callback) {
+  nomesPopulares
+    .create(nomepopular)
+    .then(newNomePopular => {
+      callback(null, newNomePopular);
     })
     .catch(error => {
       let errorObj = {
@@ -89,19 +81,19 @@ function addEspecie(especie, callback) {
     });
 }
 
-function updateEspecie(newEspecieData, callback) {
-  especies
-    .findById(newEspecieData.id_especies)
-    .then(especie => {
-      if (especie == null) {
+function updateNomePopular(newNomePopularData, callback) {
+  nomesPopulares
+    .findById(newNomePopularData.id_nomepopular)
+    .then(nomepopular => {
+      if (nomepopular == null) {
         let errorObj = {
           statusDesc: constants.valueNotFound,
           statusCode: constants.errorCodeSequelize
         };
         callback(errorObj, null);
       } else {
-        especie
-          .update(newEspecieData, {
+        nomepopular
+          .update(newNomePopularData, {
             returning: true
           })
           .then(instance => {
@@ -118,18 +110,18 @@ function updateEspecie(newEspecieData, callback) {
     });
 }
 
-function deleteEspecieBy(id_especies, callback) {
-  especies
-    .findById(id_especies)
-    .then(especie => {
-      if (especie == null) {
+function deleteNomePopularBy(id_nomepopular, callback) {
+  nomesPopulares
+    .findById(id_nomepopular)
+    .then(nomepopular => {
+      if (nomepopular == null) {
         let errorObj = {
           statusDesc: constants.valueNotFound,
           statusCode: constants.errorCodeSequelize
         };
         callback(errorObj, null);
       } else {
-        especie.destroy({ returning: true }).then(instance => {
+        nomepopular.destroy({ returning: true }).then(instance => {
           callback(null, instance);
         });
       }
@@ -154,13 +146,9 @@ function createOrderClause(query) {
 function createWhereClause(query) {
   if (query.contains !== undefined) {
     query.$or = [
+      { id_nomepopular: { like: `%${query.contains}%` } },
       { id_especie: { like: `%${query.contains}%` } },
-      { nome_cientifico: { like: `%${query.contains}%` } },
-      { nome_popular: { like: `%${query.contains}%` } },
-      { naturalidade: { like: `%${query.contains}%` } },
-      { porte: { like: `%${query.contains}%` } },
-      { genero: { like: `%${query.contains}%` } },
-      { populacao: { like: `%${query.contains}%` } }
+      { descricao: { like: `%${query.contains}%` } }
     ];
   }
   delete query.contains;
@@ -168,9 +156,9 @@ function createWhereClause(query) {
   return query;
 }
 
-module.exports.fetchEspecies = fetchEspecies;
+module.exports.fetchNomesPopulares = fetchNomesPopulares;
 module.exports.findByID = findByID;
 module.exports.findByNomePop = findByNomePop;
-module.exports.addEspecie = addEspecie;
-module.exports.deleteEspecieBy = deleteEspecieBy;
-module.exports.updateEspecie = updateEspecie;
+module.exports.addNomePopular = addNomePopular;
+module.exports.deleteNomePopularBy = deleteNomePopularBy;
+module.exports.updateNomePopular = updateNomePopular;

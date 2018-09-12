@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataType) => {
     var nomesPopulares = sequelize.define("nomesPopulares", {
-        id_nome_popular: {
+        id_nomepopular: {
             type: DataType.INTEGER,
             primaryKey: true,
             autoIncrement: true
