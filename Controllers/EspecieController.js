@@ -15,8 +15,8 @@ class EspecieController {
   static fetchEspecies(query, callback) {
     console.log(callback);
 
-    const orderQuery = UserController.constructOrderQuery(query);
-    const whereQuery = UserController.constructWhereQuery(query);
+    const orderQuery = EspecieController.constructOrderQuery(query);
+    const whereQuery = EspecieController.constructWhereQuery(query);
 
     return DAO.fetchEspecies(orderQuery, whereQuery, callback);
   }
