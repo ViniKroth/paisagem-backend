@@ -8,7 +8,7 @@ routerEspecie.post("/", especieController.addEspecie);
 
 //Fetch Routes
 routerEspecie.get('/', (req, res) => {
-    EspecieController.fetchEspecies(req.query, (error, data) => {
+    especieController.fetchEspecies(req.query, (error, data) => {
         res.json(ResponseHelper.createResponse(error, data, true))
     })
 })
