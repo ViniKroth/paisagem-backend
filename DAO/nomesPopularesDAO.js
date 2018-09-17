@@ -24,7 +24,7 @@ function fetchNomesPopulares(orderQuery, whereQuery, callback) {
     });
 }
 
-function GetByEspecie(id, callback) {
+function getByEspecie(id, callback) {
   nomesPopulares
     .findAll({
       where: {id_especie: id}
@@ -158,7 +158,7 @@ function createWhereClause(query) {
 
 module.exports.fetchNomesPopulares = fetchNomesPopulares;
 module.exports.findByID = findByID;
-module.exports.findByNomePop = findByNomePop;
+//module.exports.findByNomePop = findByNomePop;
 module.exports.addNomePopular = addNomePopular;
 module.exports.deleteNomePopularBy = deleteNomePopularBy;
 module.exports.updateNomePopular = updateNomePopular;
