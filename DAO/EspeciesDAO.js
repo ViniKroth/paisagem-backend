@@ -49,9 +49,34 @@ function findByID(id_especie, callback) {
     });
 }
 
-function findByNomePop(nome_popular, callback) {
+// function findByNomePop(nome_popular, callback) {
+//   especies
+//     .findById(nome_popular, {
+//       attributes: {}
+//     })
+//     .then(especie => {
+//       if (especie) {
+//         return callback(null, especie);
+//       } else {
+//         let errorObj = {
+//           statusDesc: constants.valueNotFound,
+//           statusCode: constants.errorCodeSequelize
+//         };
+//         return callback(errorObj, null);
+//       }
+//     })
+//     .catch(error => {
+//       let errorObj = {
+//         statusDesc: error,
+//         statusCode: constants.errorCodeSequelize
+//       };
+//       return callback(errorObj, null);
+//     });
+// }
+
+function findByNomeCientifico(nome_cientifico, callback) {
   especies
-    .findById(nome_popular, {
+    .findById(nome_cientifico, {
       attributes: {}
     })
     .then(especie => {
@@ -170,7 +195,7 @@ function createWhereClause(query) {
 
 module.exports.fetchEspecies = fetchEspecies;
 module.exports.findByID = findByID;
-module.exports.findByNomePop = findByNomePop;
+module.exports.findByNomeCientifico = findByNomeCientifico;
 module.exports.addEspecie = addEspecie;
 module.exports.deleteEspecieBy = deleteEspecieBy;
 module.exports.updateEspecie = updateEspecie;
