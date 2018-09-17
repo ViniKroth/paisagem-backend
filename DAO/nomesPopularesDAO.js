@@ -1,6 +1,7 @@
 const constants = require("../config/contants");
 const db = require("../models");
-const Op = Sequelize.Op;
+const sequelize = require('sequelize');
+const Op = sequelize.op;
 const nomesPopulares = db.sequelize.model("nomesPopulares");
 
 /*
@@ -175,7 +176,7 @@ function createWhereClause(query) {
 
 module.exports.fetchNomesPopulares = fetchNomesPopulares;
 module.exports.findByID = findByID;
-module.exports.findByNomePop = findByNomePop;
+//module.exports.findByNomePop = findByNomePop;
 module.exports.addNomePopular = addNomePopular;
 module.exports.deleteNomePopularBy = deleteNomePopularBy;
 module.exports.updateNomePopular = updateNomePopular;
