@@ -1,7 +1,9 @@
 const constants = require("../config/contants");
 const db = require("../models/index");
+const nomesPopularesDAO = require('./nomesPopularesDAO');
 
 const especies = db.sequelize.model("Especies");
+const nomesPopulares = db.sequelize.model("nomesPopulares");
 
 /*
  * Fetch a specific especies page
@@ -104,6 +106,17 @@ function addEspecie(especie, callback) {
     .create(especie)
     .then(newEspecie => {
       callback(null, newEspecie);
+
+      if(especie.nomePopular){
+        for(let i = 0; i < especie.nomePopular.length; i++){
+          let nomePopular = {
+            id_especie: newEspecie.id_especie,
+            descricao: especie.nomePopular[i].name
+          }
+
+          nomesPopularesDAO.addNomePopular(nomePopular, null);
+        }
+      }
     })
     .catch(error => {
       let errorObj = {
@@ -179,7 +192,7 @@ function createOrderClause(query) {
 function createWhereClause(query) {
   if (query.contains !== undefined) {
     query.$or = [
-      { id_especie: { like: `%${query.contains}%` } },
+      { id_especies: { like: `%${query.contains}%` } },
       { nome_cientifico: { like: `%${query.contains}%` } },
       { nome_popular: { like: `%${query.contains}%` } },
       { naturalidade: { like: `%${query.contains}%` } },

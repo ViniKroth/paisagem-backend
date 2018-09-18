@@ -1,6 +1,6 @@
 const constants = require("../config/contants");
 const db = require("../models");
-const sequelize = require('sequelize');
+const sequelize = require("sequelize");
 const Op = sequelize.op;
 const nomesPopulares = db.sequelize.model("nomesPopulares");
 
@@ -25,10 +25,10 @@ function fetchNomesPopulares(orderQuery, whereQuery, callback) {
     });
 }
 
-function GetByEspecie(id_especie, callback) {
+function findByEspecie(id_especie, callback) {
   nomesPopulares
     .findAll({
-      where: {id_especie: id_especie}
+      where: { id_especie: id_especie }
     })
     .then(nomesPopulares => {
       callback(null, nomesPopulares);
@@ -42,10 +42,10 @@ function GetByEspecie(id_especie, callback) {
     });
 }
 
-function GetByNome(nome, callback) {
+function findByNome(nome, callback) {
   nomesPopulares
     .findAll({
-      where: {nome: {[Op.like] : '%' + nome + '%'}}
+      where: { nome: { [Op.like]: "%" + nome + "%" } }
     })
     .then(nomesPopulares => {
       callback(null, nomesPopulares);
@@ -174,9 +174,10 @@ function createWhereClause(query) {
   return query;
 }
 
-module.exports.fetchNomesPopulares = fetchNomesPopulares;
 module.exports.findByID = findByID;
-//module.exports.findByNomePop = findByNomePop;
+module.exports.findByNome = findByNome;
+module.exports.findByEspecie = findByEspecie;
 module.exports.addNomePopular = addNomePopular;
-module.exports.deleteNomePopularBy = deleteNomePopularBy;
 module.exports.updateNomePopular = updateNomePopular;
+module.exports.deleteNomePopularBy = deleteNomePopularBy;
+module.exports.fetchNomesPopulares = fetchNomesPopulares;
