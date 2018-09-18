@@ -6,4 +6,11 @@ const routerEspecie = express.Router();
 
 routerEspecie.post("/", especieController.addEspecie);
 
+//Fetch Routes
+routerEspecie.get('/', (req, res) => {
+    especieController.fetchEspecies(req.query, (error, data) => {
+        res.json(ResponseHelper.createResponse(error, data, true))
+    })
+})
+
 module.exports = routerEspecie;
