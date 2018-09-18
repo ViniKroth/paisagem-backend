@@ -24,9 +24,9 @@ function fetchEspecies(orderQuery, whereQuery, callback) {
     });
 }
 
-function findByID(id_especies, callback) {
+function findByID(id_especie, callback) {
   especies
-    .findById(id_especies, {
+    .findById(id_especie, {
       attributes: {}
     })
     .then(especie => {
@@ -49,9 +49,34 @@ function findByID(id_especies, callback) {
     });
 }
 
-function findByNomePop(nome_popular, callback) {
+// function findByNomePop(nome_popular, callback) {
+//   especies
+//     .findById(nome_popular, {
+//       attributes: {}
+//     })
+//     .then(especie => {
+//       if (especie) {
+//         return callback(null, especie);
+//       } else {
+//         let errorObj = {
+//           statusDesc: constants.valueNotFound,
+//           statusCode: constants.errorCodeSequelize
+//         };
+//         return callback(errorObj, null);
+//       }
+//     })
+//     .catch(error => {
+//       let errorObj = {
+//         statusDesc: error,
+//         statusCode: constants.errorCodeSequelize
+//       };
+//       return callback(errorObj, null);
+//     });
+// }
+
+function findByNomeCientifico(nome_cientifico, callback) {
   especies
-    .findById(nome_popular, {
+    .findById(nome_cientifico, {
       attributes: {}
     })
     .then(especie => {
@@ -154,7 +179,7 @@ function createOrderClause(query) {
 function createWhereClause(query) {
   if (query.contains !== undefined) {
     query.$or = [
-      { id_especies: { like: `%${query.contains}%` } },
+      { id_especie: { like: `%${query.contains}%` } },
       { nome_cientifico: { like: `%${query.contains}%` } },
       { nome_popular: { like: `%${query.contains}%` } },
       { naturalidade: { like: `%${query.contains}%` } },
@@ -170,7 +195,7 @@ function createWhereClause(query) {
 
 module.exports.fetchEspecies = fetchEspecies;
 module.exports.findByID = findByID;
-module.exports.findByNomePop = findByNomePop;
+module.exports.findByNomeCientifico = findByNomeCientifico;
 module.exports.addEspecie = addEspecie;
 module.exports.deleteEspecieBy = deleteEspecieBy;
 module.exports.updateEspecie = updateEspecie;
