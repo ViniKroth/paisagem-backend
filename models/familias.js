@@ -9,7 +9,7 @@ module.exports = (sequelize, DataType) => {
             type: DataType.STRING
         },
         descricao: {
-            type: DataType.STRING
+            type: DataType.TEXT
         },
     })
 

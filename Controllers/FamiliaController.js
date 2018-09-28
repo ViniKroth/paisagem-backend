@@ -9,8 +9,8 @@ class FamiliaController {
   static fetchFamilias(query, callback) {
     console.log(callback);
 
-    const orderQuery = EspecieController.constructOrderQuery(query);
-    const whereQuery = EspecieController.constructWhereQuery(query);
+    const orderQuery = FamiliaController.constructOrderQuery(query);
+    const whereQuery = FamiliaController.constructWhereQuery(query);
 
     return daoFamilia.fetchFamilias(orderQuery, whereQuery, callback);
   }
@@ -26,9 +26,9 @@ class FamiliaController {
       }
     });
   }
-
+//jjjj
   static addFamilia(req, res, next) {
-    daoFamilia.addEspecie(req.body, (error, familia) => {
+    daoFamilia.addFamilia(req.body, (error, familia) => {
       if (error) {
         res.json(error);
         res.status(400);
