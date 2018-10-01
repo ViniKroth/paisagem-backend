@@ -3,21 +3,21 @@
     "username": "root",
     "password": "senha",
     "database": "ages-paisagem",
-    "host": "localhost",
+    "host": "paisagem-db",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "senha",
     "database": "ages-paisagem",
-    "host": "database",
+    "host": "paisagem-db",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": "senha",
     "database": "ages-paisagem",
-    "host": "database",
+    "host": "paisagem-db",
     "dialect": "mysql"
   }
 }
