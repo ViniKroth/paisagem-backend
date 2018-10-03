@@ -1,20 +1,20 @@
 const constants = require("../config/contants");
 const db = require("../models");
-
-const usuarios = db.sequelize.model("Users");
+const sequelize = require("sequelize");
+const Op = sequelize.op;
+const nomesPopulares = db.sequelize.model("nomesPopulares");
 
 /*
- * Fetch a specific Usuarios page
+ * Fetch a specific nomepopulares page
  */
-function fetchUsers(orderQuery, whereQuery, callback) {
-  usuarios
+function fetchNomesPopulares(orderQuery, whereQuery, callback) {
+  nomesPopulares
     .findAll({
-      attributes: { exclude: ["password", "salt"] },
       order: createOrderClause(orderQuery),
       where: createWhereClause(whereQuery)
     })
-    .then(usuarios => {
-      callback(null, usuarios);
+    .then(nomesPopulares => {
+      callback(null, nomesPopulares);
     })
     .catch(error => {
       let errorObj = {
@@ -25,39 +25,48 @@ function fetchUsers(orderQuery, whereQuery, callback) {
     });
 }
 
-function findByID(id_usuario, callback) {
-  usuarios
-    .findById(id_usuario, {
-      attributes: { exclude: ["password", "salt"] }
+function findByEspecie(id_especie, callback) {
+  nomesPopulares
+    .findAll({
+      where: { id_especie: id_especie }
     })
-    .then(usuario => {
-      if (usuario) {
-        return callback(null, usuario);
-      } else {
-        let errorObj = {
-          statusDesc: constants.valueNotFound,
-          statusCode: constants.errorCodeSequelize
-        };
-        return callback(errorObj, null);
-      }
+    .then(nomesPopulares => {
+      callback(null, nomesPopulares);
     })
     .catch(error => {
       let errorObj = {
         statusDesc: error,
         statusCode: constants.errorCodeSequelize
       };
-      return callback(errorObj, null);
+      callback(errorObj, null);
     });
 }
 
 function findByNome(nome, callback) {
-  usuarios
-    .findById(nome, {
-      attributes: { exclude: ["password", "salt"] }
+  nomesPopulares
+    .findAll({
+      where: { nome: { [Op.like]: "%" + nome + "%" } }
     })
-    .then(usuario => {
-      if (usuario) {
-        return callback(null, usuario);
+    .then(nomesPopulares => {
+      callback(null, nomesPopulares);
+    })
+    .catch(error => {
+      let errorObj = {
+        statusDesc: error,
+        statusCode: constants.errorCodeSequelize
+      };
+      callback(errorObj, null);
+    });
+}
+
+function findByID(id_nomepopular, callback) {
+  nomesPopulares
+    .findById(id_nomepopular, {
+      attributes: {}
+    })
+    .then(nomepopular => {
+      if (nomepopular) {
+        return callback(null, nomepopular);
       } else {
         let errorObj = {
           statusDesc: constants.valueNotFound,
@@ -75,14 +84,11 @@ function findByNome(nome, callback) {
     });
 }
 
-function addUser(usuario, callback) {
-  usuarios
-    .create(usuario)
-    .then(newUsuario => {
-      delete newusuario.dataValues.password;
-      delete newusuario.dataValues.salt;
-
-      callback(null, newusuario);
+function addNomePopular(nomepopular, callback) {
+  nomesPopulares
+    .create(nomepopular)
+    .then(newNomePopular => {
+      callback(null, newNomePopular);
     })
     .catch(error => {
       let errorObj = {
@@ -93,19 +99,19 @@ function addUser(usuario, callback) {
     });
 }
 
-function updateUser(newUsuarioData, callback) {
-  usuarios
-    .findById(newUsuarioData.id)
-    .then(usuario => {
-      if (usuario == null) {
+function updateNomePopular(newNomePopularData, callback) {
+  nomesPopulares
+    .findById(newNomePopularData.id_nomepopular)
+    .then(nomepopular => {
+      if (nomepopular == null) {
         let errorObj = {
           statusDesc: constants.valueNotFound,
           statusCode: constants.errorCodeSequelize
         };
         callback(errorObj, null);
       } else {
-        usuario
-          .update(newUsuarioData, {
+        nomepopular
+          .update(newNomePopularData, {
             returning: true
           })
           .then(instance => {
@@ -122,18 +128,18 @@ function updateUser(newUsuarioData, callback) {
     });
 }
 
-function deleteUserBy(id, callback) {
-  usuarios
-    .findById(id)
-    .then(usuario => {
-      if (usuario == null) {
+function deleteNomePopularBy(id_nomepopular, callback) {
+  nomesPopulares
+    .findById(id_nomepopular)
+    .then(nomepopular => {
+      if (nomepopular == null) {
         let errorObj = {
           statusDesc: constants.valueNotFound,
           statusCode: constants.errorCodeSequelize
         };
         callback(errorObj, null);
       } else {
-        usuario.destroy({ returning: true }).then(instance => {
+        nomepopular.destroy({ returning: true }).then(instance => {
           callback(null, instance);
         });
       }
@@ -158,10 +164,9 @@ function createOrderClause(query) {
 function createWhereClause(query) {
   if (query.contains !== undefined) {
     query.$or = [
-      { id_usuario: { like: `%${query.contains}%` } },
-      { nome: { like: `%${query.contains}%` } },
-      { username: { like: `%${query.contains}%` } },
-      { email: { like: `%${query.contains}%` } }
+      { id_nomepopular: { like: `%${query.contains}%` } },
+      { id_especie: { like: `%${query.contains}%` } },
+      { nome: { like: `%${query.contains}%` } }
     ];
   }
   delete query.contains;
@@ -169,9 +174,10 @@ function createWhereClause(query) {
   return query;
 }
 
-module.exports.fetchUsers = fetchUsers;
 module.exports.findByID = findByID;
 module.exports.findByNome = findByNome;
-module.exports.addUser = addUser;
-module.exports.deleteUserBy = deleteUserBy;
-module.exports.updateUser = updateUser;
+module.exports.findByEspecie = findByEspecie;
+module.exports.addNomePopular = addNomePopular;
+module.exports.updateNomePopular = updateNomePopular;
+module.exports.deleteNomePopularBy = deleteNomePopularBy;
+module.exports.fetchNomesPopulares = fetchNomesPopulares;
