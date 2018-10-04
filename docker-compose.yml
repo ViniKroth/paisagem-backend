@@ -1,0 +1,32 @@
+# How to run:
+
+version: '2'
+services:
+  paisagem-db:
+    container_name: paisagem-db
+    image: mysql:5.6
+    expose:
+      - "3306"
+    ports:
+      - "3309:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=senha
+      - MYSQL_DATABASE=ages-paisagem
+    volumes:
+     - /vol/ages-paisagem:/var/lib/mysql
+
+  paisagem-api:
+    container_name: paisagem-api
+    build:
+      context: .
+      dockerfile: Dockerfile_api
+    image: paisagem-api:latest
+    depends_on:
+      - "paisagem-db"
+    expose:
+      - "4000"
+    ports:
+      - "4501:4000"
+    environment:
+      - NODE_ENV=production
+    command: ["./wait-for-it.sh", "-t", "0", "paisagem-db:3306", "--", "npm","start", ]
