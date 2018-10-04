@@ -188,7 +188,7 @@ function createOrderClause(query) {
       : [db[query.model], query.field, query.isAscending]
   ];
 }
-
+//push teste
 function createWhereClause(query) {
   if (query.contains !== undefined) {
     query.$or = [
