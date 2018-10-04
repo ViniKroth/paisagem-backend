@@ -34,7 +34,7 @@ node {
             mail body: 'project build successful in HML',
                      from: 'jenkinsx@ages.com',
                      replyTo: 'cassio.trindade@pucrs.br',
-                     subject: 'Success CI Dietoterapia',
+                     subject: 'Success CI Paissagem',
                      to: 'cassio.trindade@pucrs.br'
         }
 
@@ -46,7 +46,7 @@ node {
             mail body: "project build error is here: ${env.BUILD_URL}" ,
             from: 'jenkinsx@ages.com',
             replyTo: 'cassio.trindade@pucrs.br',
-            subject: 'Error CI Dietoterapia',
+            subject: 'Error CI Paisagem',
             to: 'cassio.trindade@pucrs.br'
 
         throw err
