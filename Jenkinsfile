@@ -19,7 +19,7 @@ node {
         }
 
         stage('Down Images Maven, DB, Api and Web'){
-           sh 'ssh root@10.32.223.4 -p 5439 "cd /opt/docker/paisagem/api; docker-compose down;  docker-compose -f docker-compose-api.yml down; docker-compose -f docker-compose-web.yml down"'
+           sh 'ssh root@10.32.223.4 -p 5439 "cd /opt/docker/paisagem/api; docker-compose down; docker-compose -f docker-compose-web.yml down"'
         }
 
         stage('Build and Up Docker Image Api'){
