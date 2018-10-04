@@ -30,14 +30,3 @@ services:
     environment:
       - NODE_ENV=production
     command: ["./wait-for-it.sh", "-t", "0", "paisagem-db:3306", "--", "npm","start", ]
-
-  paisagem-web:
-    container_name: paisagem-web
-    build:
-      context: .
-      dockerfile: Dockerfile_web
-    image: paisagem-web:latest
-    depends_on:
-      - "paisagem-api"
-    ports:
-      - "4500:80"

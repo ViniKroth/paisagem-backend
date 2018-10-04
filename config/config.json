@@ -3,7 +3,7 @@
     "username": "root",
     "password": "senha",
     "database": "ages-paisagem",
-    "host": "paisagem-db",
+    "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
