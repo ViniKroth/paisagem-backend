@@ -9,7 +9,7 @@ pwd
 nvm use 8.9.3
 npm install
 npm build
-rm -rf $dir/api/build/
+rm -rf $dir/api/web/build/
 cp -r $dir/web/build/ $dir/api/
 cd $dir/api
 ls -la
