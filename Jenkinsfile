@@ -23,7 +23,7 @@ node {
         }
 
         stage('Build and Up Docker Image Api'){
-           sh 'ssh root@10.32.223.4 -p 5439 "cd /opt/docker/paisagem/api; docker-compose up --build"'
+           sh 'ssh root@10.32.223.4 -p 5439 "cd /opt/docker/paisagem/api; docker-compose up --build -d"'
         }
 
         stage('Build and Up Docker Image Web'){
@@ -32,7 +32,7 @@ node {
 
         stage('Success'){
             mail body: 'project build successful in HML',
-                     from: 'jenkinsx@ages.com',
+                     from: 'jenkins@ages.com',
                      replyTo: 'cassio.trindade@pucrs.br',
                      subject: 'Success CI Paissagem',
                      to: 'cassio.trindade@pucrs.br'
@@ -44,7 +44,7 @@ node {
         currentBuild.result = "FAILURE"
 
             mail body: "project build error is here: ${env.BUILD_URL}" ,
-            from: 'jenkinsx@ages.com',
+            from: 'jenkins@ages.com',
             replyTo: 'cassio.trindade@pucrs.br',
             subject: 'Error CI Paisagem',
             to: 'cassio.trindade@pucrs.br'
