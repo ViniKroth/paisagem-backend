@@ -18,7 +18,7 @@ node {
             sh 'ssh root@10.32.223.4 -p 5439 "/opt/docker/paisagem/ic.sh"'
         }
 
-        stage('Down Images Maven, DB, Api and Web'){
+        stage('Down Images DB, Api and Web'){
            sh 'ssh root@10.32.223.4 -p 5439 "cd /opt/docker/paisagem/api; docker-compose down; docker-compose -f docker-compose-web.yml down"'
         }
 
