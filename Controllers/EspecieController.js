@@ -39,6 +39,18 @@ class EspecieController {
     });
   }
 
+  static addIndividuo(req, res, next){
+    daoEspecie.addIndividuo(req.body, (error, individuo) => {
+      if(error) {
+        res.json(error);
+        res.status(400);
+      } else {
+        res.json(individuo);
+        res.status(200);
+      }
+    })
+  }
+
   static constructOrderQuery(query) {
     /**
      * Construct Order Query:
@@ -81,6 +93,8 @@ class EspecieController {
 
     return whereQuery;
   }
+
+  
 }
 
 module.exports = EspecieController;

@@ -16,4 +16,6 @@ routerEspecie.get("/", (req, res) => {
   });
 });
 
+routerEspecie.get('/', especieController.addIndividuo);
+
 module.exports = routerEspecie;

@@ -127,6 +127,10 @@ function addEspecie(especie, callback) {
     });
 }
 
+function addIndividuo(individuo, callback){
+  
+}
+
 function updateEspecie(newEspecieData, callback) {
   especies
     .findById(newEspecieData.id_especies)
