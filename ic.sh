@@ -7,6 +7,7 @@ dir=/opt/docker/paisagem
 cd $dir/web
 pwd
 nvm use 8.9.3
+export NODE_ENV=hml
 npm install
 npm build
 rm -rf $dir/api/web/build/
