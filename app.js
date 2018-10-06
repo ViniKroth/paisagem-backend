@@ -11,6 +11,12 @@ const TokenManager = require("./Helpers/AuthManager");
 
 // Initialize server
 models.sequelize.sync().then(function() {
+  models.Users.create({
+    "username":"admin",
+    "senha":"8c9a812879a9324b5becada806b85389685944212118971e8ff1507d74af67ed",
+    "salt":"34df78b35c833deade9fd2e77db5341a27252206f46d0aeb065673e2529a0576",
+    "nome":"admin"
+  })
   setupServer();
 });
 
