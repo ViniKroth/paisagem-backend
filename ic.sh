@@ -7,13 +7,14 @@ dir=/opt/docker/paisagem
 cd $dir/web
 pwd
 nvm use 8.9.3
-export NODE_ENV=hml
-npm install
-npm build
 rm -rf $dir/api/web/build/
-cp -r $dir/web/build/ $dir/api/
+
+npm install
+npm run-script build
+ls $dir/api/web/build/
+mv -f /opt/docker/paisagem/web/build /opt/docker/paisagem/api/web/build
 cd $dir/api
-ls -la
+ls -la $dir/api/web/build
 
 
 
