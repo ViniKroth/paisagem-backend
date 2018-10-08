@@ -111,7 +111,7 @@ function addEspecie(especie, callback) {
         for(let i = 0; i < especie.nomePopular.length; i++){
           let nomePopular = {
             id_especie: newEspecie.id_especie,
-            descricao: especie.nomePopular[i].name
+            nome: especie.nomePopular[i].nome
           }
 
           nomesPopularesDAO.addNomePopular(nomePopular, null);
