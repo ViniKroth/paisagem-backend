@@ -12,17 +12,7 @@ module.exports = (sequelize, DataType) => {
                 key: 'id_familia'
             }
         }, 
-        id_classificacao: {
-            type: DataType.INTEGER,
-            references: {
-                model: 'Classificacoes',
-                key: 'id_classificacao'
-            }
-        }, 
         nome_cientifico: {
-            type: DataType.STRING,
-        },
-        floracao: {
             type: DataType.STRING,
         },
         folhagem: {
@@ -32,28 +22,22 @@ module.exports = (sequelize, DataType) => {
             type: DataType.STRING,
         },
         potencialpaisag: {
-            type: DataType.STRING,
+            type: DataType.TEXT,
         },
         descricao: {
-            type: DataType.STRING,
-        },
-        naturalidade: {
-            type: DataType.STRING
+            type: DataType.TEXT,
         },
         porte: {
             type: DataType.STRING
         },
         populacao: {
-            type: DataType.STRING
+            type: DataType.INTEGER
         },
         foto: {
             type: DataType.STRING
         },
         desenho: {
             type: DataType.STRING
-        },
-        qtd_individuos: {
-            type: DataType.INTEGER,
         },
         FloracaoOutono: {
             type: DataType.BOOLEAN
