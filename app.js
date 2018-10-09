@@ -24,9 +24,10 @@ function setupServer() {
   const app = express();
 
   app.use(cors());
-  app.use(bodyParser.json());
+  //app.use(bodyParser.json());
+  app.use(bodyParser.json({limit: '10mb', extended: true}))
   app.use("/api/especies", especiesRouter);
-  app.use("/api/familias", familiasRouter);{console.log("é pra ter dado certo");};
+  app.use("/api/familias", familiasRouter);
   app.use("/api/login", loginRouter);
   app.use(
     "/api/users",
