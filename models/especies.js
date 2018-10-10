@@ -31,19 +31,16 @@ module.exports = (sequelize, DataType) => {
         origem: {
             type: DataType.STRING,
         },
-        nome_popular: {
-            type: DataType.STRING
-        },
         potencialpaisag: {
+            type: DataType.STRING,
+        },
+        descricao: {
             type: DataType.STRING,
         },
         naturalidade: {
             type: DataType.STRING
         },
         porte: {
-            type: DataType.STRING
-        },
-        genero: {
             type: DataType.STRING
         },
         populacao: {
@@ -58,24 +55,39 @@ module.exports = (sequelize, DataType) => {
         qtd_individuos: {
             type: DataType.INTEGER,
         },
-        outono: {
+        FloracaoOutono: {
             type: DataType.BOOLEAN
         },
-        verao: {
+        FloracaoVerao: {
             type: DataType.BOOLEAN
         },
-        primavera: {
+        FloracaoPrimavera: {
             type: DataType.BOOLEAN
         },
-        inverno: {
+        FloracaoInverno: {
             type: DataType.BOOLEAN
         },
-        seco: {
+        FrutificacaoOutono: {
+            type: DataType.BOOLEAN
+        },
+        FrutificacaoVerao: {
+            type: DataType.BOOLEAN
+        },
+        FrutificacaoPrimavera: {
+            type: DataType.BOOLEAN
+        },
+        FrutificacaoInverno: {
+            type: DataType.BOOLEAN
+        },
+        /*seco: {
             type: DataType.BOOLEAN
         },
         carnoso: {
             type: DataType.BOOLEAN
-        },
+        },*/
+        tipoFruto: {
+            type: DataType.STRING
+        }
     })
 
     return especies

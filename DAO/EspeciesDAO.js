@@ -111,7 +111,7 @@ function addEspecie(especie, callback) {
         for(let i = 0; i < especie.nomePopular.length; i++){
           let nomePopular = {
             id_especie: newEspecie.id_especie,
-            descricao: especie.nomePopular[i].name
+            nome: especie.nomePopular[i].nome
           }
 
           nomesPopularesDAO.addNomePopular(nomePopular, null);
@@ -188,7 +188,7 @@ function createOrderClause(query) {
       : [db[query.model], query.field, query.isAscending]
   ];
 }
-
+//push teste
 function createWhereClause(query) {
   if (query.contains !== undefined) {
     query.$or = [
