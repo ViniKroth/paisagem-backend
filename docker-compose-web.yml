@@ -10,3 +10,4 @@ services:
     image: paisagem-web:latest
     ports:
       - "4500:80"
+      - "443:443"
