@@ -28,6 +28,7 @@ class EspecieController {
   }
 
   static addEspecie(req, res, next) {
+   
     daoEspecie.addEspecie(req.body, (error, especie) => {
       if (error) {
         res.json(error);

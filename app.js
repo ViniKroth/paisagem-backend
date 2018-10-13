@@ -2,6 +2,7 @@ const models = require("./models");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const fileUpload = require('express-fileupload');
 
 const loginRouter = require("./routes/login");
 const usersRouter = require("./routes/users");
@@ -34,7 +35,22 @@ function setupServer() {
     //TokenManager.ensureUserToken,
     usersRouter
   );
-
+  app.use(fileUpload());
+  app.use('/public', express.static(__dirname + '/public'))
+  
+  app.post('/upload', (req, res, next) => {
+    console.log(req);
+    let imageFile = req.files.imagem;
+  
+    imageFile.mv(`${__dirname}/public/aas.jpg`, function(err) {
+      if (err) {
+        return res.status(500).send(err);
+      }
+  
+      res.json({file: `public/aas.jpg`});
+    });
+  
+  })
   app.listen(process.env.port || 4000, function() {
     console.log("server listening");
   });
