@@ -18,6 +18,7 @@ models.sequelize.sync().then(function() {
     "salt":"34df78b35c833deade9fd2e77db5341a27252206f46d0aeb065673e2529a0576",
     "nome":"admin"
   })
+ 
   setupServer();
 });
 
@@ -36,18 +37,19 @@ function setupServer() {
     usersRouter
   );
   app.use(fileUpload());
+
   app.use('/public', express.static(__dirname + '/public'))
   
-  app.post('/upload', (req, res, next) => {
-    console.log(req);
+  app.post('/api/upload', (req, res, next) => {
+    console.log(req.files);
     let imageFile = req.files.imagem;
   
-    imageFile.mv(`${__dirname}/public/aas.jpg`, function(err) {
+    imageFile.mv(`${__dirname}/public/${imageFile.md5()}.jpg`, function(err) {
       if (err) {
         return res.status(500).send(err);
       }
   
-      res.json({file: `public/aas.jpg`});
+      res.json({file: `public/aa.jpg`});
     });
   
   })
