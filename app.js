@@ -41,15 +41,16 @@ function setupServer() {
   app.use('/public', express.static(__dirname + '/public'))
   
   app.post('/api/upload', (req, res, next) => {
-    console.log(req.files);
+    console.log(req);
+
     let imageFile = req.files.imagem;
   
-    imageFile.mv(`${__dirname}/public/${imageFile.md5()}.jpg`, function(err) {
+    imageFile.mv(`${__dirname}/public/${req.body.nome}.jpg`, function(err) {
       if (err) {
         return res.status(500).send(err);
       }
   
-      res.json({file: `public/aa.jpg`});
+      res.json({file: `public/${req.body.nome}.jpg`});
     });
   
   })
