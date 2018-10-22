@@ -71,6 +71,12 @@ module.exports = (sequelize, DataType) => {
         },*/
         tipoFruto: {
             type: DataType.STRING
+        },
+        diametroCopa: {
+            type: DataType.INTEGER
+        },
+        alturaEspecie: {
+            type: DataType.INTEGER
         }
     })
 
