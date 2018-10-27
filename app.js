@@ -6,6 +6,7 @@ const cors = require("cors");
 const loginRouter = require("./routes/login");
 const usersRouter = require("./routes/users");
 const especiesRouter = require("./routes/especies");
+const nomesPopularesRouter = require("./routes/nomesPopulares");
 const familiasRouter = require("./routes/familias");
 const TokenManager = require("./Helpers/AuthManager");
 
@@ -29,6 +30,7 @@ function setupServer() {
   app.use("/api/especies", especiesRouter);
   app.use("/api/familias", familiasRouter);
   app.use("/api/login", loginRouter);
+  app.use("/api/nomesPopulares", nomesPopularesRouter);
   app.use(
     "/api/users",
     //TokenManager.ensureUserToken,
