@@ -2,6 +2,7 @@ const models = require("./models");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const fileUpload = require('express-fileupload');
 
 const loginRouter = require("./routes/login");
 const usersRouter = require("./routes/users");
@@ -17,6 +18,7 @@ models.sequelize.sync().then(function() {
     "salt":"34df78b35c833deade9fd2e77db5341a27252206f46d0aeb065673e2529a0576",
     "nome":"admin"
   })
+ 
   setupServer();
 });
 
@@ -34,7 +36,24 @@ function setupServer() {
     //TokenManager.ensureUserToken,
     usersRouter
   );
+  app.use(fileUpload());
 
+  app.use('/public', express.static(__dirname + '/public'))
+  
+  app.post('/api/upload', (req, res, next) => {
+    console.log(req);
+
+    let imageFile = req.files.imagem;
+  
+    imageFile.mv(`${__dirname}/public/${req.body.nome}.jpg`, function(err) {
+      if (err) {
+        return res.status(500).send(err);
+      }
+  
+      res.json({file: `public/${req.body.nome}.jpg`});
+    });
+  
+  })
   app.listen(process.env.port || 4000, function() {
     console.log("server listening");
   });
