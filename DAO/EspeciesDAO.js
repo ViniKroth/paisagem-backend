@@ -101,7 +101,8 @@ function findByNomeCientifico(nome_cientifico, callback) {
     });
 }
 
-function addEspecie(especie, callback) {
+function addEspecie( especie, callback) {
+
   especies
     .create(especie)
     .then(newEspecie => {
@@ -117,6 +118,9 @@ function addEspecie(especie, callback) {
           nomesPopularesDAO.addNomePopular(nomePopular, null);
         }
       }
+      
+      
+     
     })
     .catch(error => {
       let errorObj = {
