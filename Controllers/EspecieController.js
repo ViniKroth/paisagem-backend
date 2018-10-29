@@ -7,8 +7,6 @@ class EspecieController {
 
   //Fetch especie
   static fetchEspecies(query, callback) {
-    console.log(callback);
-
     const orderQuery = EspecieController.constructOrderQuery(query);
     const whereQuery = EspecieController.constructWhereQuery(query);
 
@@ -76,8 +74,6 @@ class EspecieController {
     if (query.contains !== undefined) {
       whereQuery.contains = query.contains;
     }
-
-    console.log(whereQuery);
 
     return whereQuery;
   }

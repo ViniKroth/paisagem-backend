@@ -7,8 +7,6 @@ class FamiliaController {
 
   //Fetch especie
   static fetchFamilias(query, callback) {
-    console.log(callback);
-
     const orderQuery = FamiliaController.constructOrderQuery(query);
     const whereQuery = FamiliaController.constructWhereQuery(query);
 
@@ -76,8 +74,6 @@ class FamiliaController {
     if (query.contains !== undefined) {
       whereQuery.contains = query.contains;
     }
-
-    console.log(whereQuery);
 
     return whereQuery;
   }
