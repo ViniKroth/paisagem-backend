@@ -3,6 +3,7 @@ const db = require("../models/index");
 const nomesPopularesDAO = require('./nomesPopularesDAO');
 
 const especies = db.sequelize.model("Especies");
+const individuos = db.sequelize.model("individuos");
 const nomesPopulares = db.sequelize.model("nomesPopulares");
 
 /*
@@ -128,7 +129,17 @@ function addEspecie(especie, callback) {
 }
 
 function addIndividuo(individuo, callback){
-  
+  individuos.create(individuo)
+  .then(newIndividuo => {
+      delete newIndividuo.dataValues.password
+      delete newIndividuo.dataValues.salt
+      
+      callback(null, newIndividuo)
+  })
+  .catch(error => {
+      let errorObj = { statusDesc: error, statusCode: constants.errorCodeSequelize }
+      callback(errorObj, null)
+  })
 }
 
 function updateEspecie(newEspecieData, callback) {
