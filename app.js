@@ -19,7 +19,63 @@ models.sequelize.sync().then(function() {
     "salt":"34df78b35c833deade9fd2e77db5341a27252206f46d0aeb065673e2529a0576",
     "nome":"admin"
   })
- 
+  models.Familias.create({
+    "nome": "Acanthaceae"
+   })
+   models.Familias.create({
+    "nome": "Annonaceae"
+   })
+   models.Familias.create({
+    "nome": "Apiaceae"
+   })
+   models.Familias.create({
+    "nome": "Apocynaceae"
+   })
+   models.Familias.create({
+    "nome": "Araliaceae"
+   })
+   models.Familias.create({
+    "nome": "Bignoniaceae"
+   })
+   models.Familias.create({
+    "nome": "Boraginaceae"
+   })
+   models.Familias.create({
+    "nome": "Calyceraceae"
+   })
+   models.Familias.create({
+    "nome": "Cannaceae"
+   })
+   models.Familias.create({
+    "nome": "Convolvulaceae"
+   })
+   models.Familias.create({
+    "nome": "Ericaceae"
+   })
+   models.Familias.create({
+    "nome": "Lecythidaceae"
+   })
+   models.Familias.create({
+    "nome": "Magnoliaceae"
+   })
+   models.Familias.create({
+    "nome": "Piperaceae"
+   })
+   models.Familias.create({
+    "nome": "Poaceae"
+   })
+   models.Familias.create({
+    "nome": "Rubiaceae"
+   })
+   models.Familias.create({
+    "nome": "Solanaceae"
+   })
+   models.Familias.create({
+    "nome": "Theophrastaceae"
+   })
+   models.Familias.create({
+    "nome": "Verbenaceae"
+   })
   setupServer();
 });
 
