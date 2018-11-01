@@ -1,53 +1,40 @@
-const daoEspecie = require("../DAO/EspeciesDAO");
+const daoFamilia = require("../DAO/FamiliasDAO");
 
-class EspecieController {
+class FamiliaController {
   /*  ROTAS DE FETCH:
      *  Todas as rotas de fetch lidam com informações pertinentes a vários usuários
      */
 
   //Fetch especie
-  static fetchEspecies(query, callback) {
-    const orderQuery = EspecieController.constructOrderQuery(query);
-    const whereQuery = EspecieController.constructWhereQuery(query);
+  static fetchFamilias(query, callback) {
+    const orderQuery = FamiliaController.constructOrderQuery(query);
+    const whereQuery = FamiliaController.constructWhereQuery(query);
 
-    return daoEspecie.fetchEspecies(orderQuery, whereQuery, callback);
+    return daoFamilia.fetchFamilias(orderQuery, whereQuery, callback);
   }
 
-  static getEspecieByID(req, res, next) {
-    daoEspecie.findByID(req.params.id, (error, especie) => {
+  static getFamiliaByID(req, res, next) {
+    daoFamilia.findByID(req.params.id, (error, familia) => {
       if (error) {
         res.json(error);
         res.status(400);
       } else {
-        res.json(especie);
+        res.json(familia);
         res.status(200);
       }
     });
   }
-
-  static addEspecie(req, res, next) {
-   
-    daoEspecie.addEspecie(req.body, (error, especie) => {
+//jjjj
+  static addFamilia(req, res, next) {
+    daoFamilia.addFamilia(req.body, (error, familia) => {
       if (error) {
         res.json(error);
         res.status(400);
       } else {
-        res.json(especie);
+        res.json(familia);
         res.status(200);
       }
     });
-  }
-
-  static addIndividuo(req, res, next){
-    daoEspecie.addIndividuo(req.body, (error, individuo) => {
-      if(error) {
-        res.json(error);
-        res.status(400);
-      } else {
-        res.json(individuo);
-        res.status(200);
-      }
-    })
   }
 
   static constructOrderQuery(query) {
@@ -65,12 +52,12 @@ class EspecieController {
 
     switch (query.sort) {
       case "nome":
-        orderQuery.field = "nome_cientifico";
+        orderQuery.field = "nome";
         break;
 
       default:
         //Default Order Query
-        orderQuery.field = "id_especie";
+        orderQuery.field = "id_familia";
     }
 
     return orderQuery;
@@ -90,8 +77,6 @@ class EspecieController {
 
     return whereQuery;
   }
-
-  
 }
 
-module.exports = EspecieController;
+module.exports = FamiliaController;

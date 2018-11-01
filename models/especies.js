@@ -12,17 +12,7 @@ module.exports = (sequelize, DataType) => {
                 key: 'id_familia'
             }
         }, 
-        id_classificacao: {
-            type: DataType.INTEGER,
-            references: {
-                model: 'Classificacoes',
-                key: 'id_classificacao'
-            }
-        }, 
         nome_cientifico: {
-            type: DataType.STRING,
-        },
-        floracao: {
             type: DataType.STRING,
         },
         folhagem: {
@@ -31,23 +21,17 @@ module.exports = (sequelize, DataType) => {
         origem: {
             type: DataType.STRING,
         },
-        nome_popular: {
-            type: DataType.STRING
-        },
         potencialpaisag: {
-            type: DataType.STRING,
+            type: DataType.TEXT,
         },
-        naturalidade: {
-            type: DataType.STRING
+        descricao: {
+            type: DataType.TEXT,
         },
         porte: {
             type: DataType.STRING
         },
-        genero: {
-            type: DataType.STRING
-        },
         populacao: {
-            type: DataType.STRING
+            type: DataType.INTEGER
         },
         foto: {
             type: DataType.STRING
@@ -55,27 +39,45 @@ module.exports = (sequelize, DataType) => {
         desenho: {
             type: DataType.STRING
         },
-        qtd_individuos: {
-            type: DataType.INTEGER,
-        },
-        outono: {
+        FloracaoOutono: {
             type: DataType.BOOLEAN
         },
-        verao: {
+        FloracaoVerao: {
             type: DataType.BOOLEAN
         },
-        primavera: {
+        FloracaoPrimavera: {
             type: DataType.BOOLEAN
         },
-        inverno: {
+        FloracaoInverno: {
             type: DataType.BOOLEAN
         },
-        seco: {
+        FrutificacaoOutono: {
+            type: DataType.BOOLEAN
+        },
+        FrutificacaoVerao: {
+            type: DataType.BOOLEAN
+        },
+        FrutificacaoPrimavera: {
+            type: DataType.BOOLEAN
+        },
+        FrutificacaoInverno: {
+            type: DataType.BOOLEAN
+        },
+        /*seco: {
             type: DataType.BOOLEAN
         },
         carnoso: {
             type: DataType.BOOLEAN
+        },*/
+        tipoFruto: {
+            type: DataType.STRING
         },
+        diametroCopa: {
+            type: DataType.INTEGER
+        },
+        alturaEspecie: {
+            type: DataType.INTEGER
+        }
     })
 
     return especies
