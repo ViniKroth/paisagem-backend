@@ -5,6 +5,7 @@ const nomesPopularesDAO = require('./nomesPopularesDAO');
 const especies = db.sequelize.model("Especies");
 const individuos = db.sequelize.model("individuos");
 const nomesPopulares = db.sequelize.model("nomesPopulares");
+const imagensIndividuosDAO  = require('./imagensIndividuosDAO');
 
 /*
  * Fetch a specific especies page
@@ -138,7 +139,17 @@ function addIndividuo(individuo, callback){
       delete newIndividuo.dataValues.password
       delete newIndividuo.dataValues.salt
       
-      callback(null, newIndividuo)
+      callback(null, newIndividuo);
+      if(individuos.imagens){
+        for(let i = 0; i < individuos.imagens.length; i++){
+          let imagem = {
+            id_individuo: individuos.id_individuo,
+            path: individuos.imagens[i].path
+          }
+
+          imagensIndividuos.addImagem(imagem, null);
+        }
+      }
   })
   .catch(error => {
       let errorObj = { statusDesc: error, statusCode: constants.errorCodeSequelize }
@@ -226,6 +237,7 @@ function createWhereClause(query) {
 }
 
 module.exports.fetchEspecies = fetchEspecies;
+module.exports.addIndividuo = addIndividuo;
 module.exports.findByID = findByID;
 module.exports.findByNomeCientifico = findByNomeCientifico;
 module.exports.addEspecie = addEspecie;
