@@ -134,20 +134,22 @@ function addEspecie( especie, callback) {
 }
 
 function addIndividuo(individuo, callback){
+  console.log (individuo)
   individuos.create(individuo)
   .then(newIndividuo => {
       delete newIndividuo.dataValues.password
       delete newIndividuo.dataValues.salt
       
       callback(null, newIndividuo);
-      if(individuos.imagens){
-        for(let i = 0; i < individuos.imagens.length; i++){
+      if(individuo.imagens){
+        
+        for(let i = 0; i < individuo.imagens.length; i++){
           let imagem = {
-            id_individuo: individuos.id_individuo,
-            path: individuos.imagens[i].path
+            id_individuo: newIndividuo.id_individuo,
+            path: individuo.imagens[i]
           }
 
-          imagensIndividuos.addImagem(imagem, null);
+          imagensIndividuosDAO.addImagem(imagem, null);
         }
       }
   })

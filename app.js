@@ -43,7 +43,7 @@ function setupServer() {
   app.use('/public', express.static(__dirname + '/public'))
   
   app.post('/api/upload', (req, res, next) => {
-    console.log(req);
+    
 
     let imageFile = req.files.imagem;
   
