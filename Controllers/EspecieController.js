@@ -24,6 +24,19 @@ class EspecieController {
       }
     });
   }
+  
+
+  static findIndividuoByEspecie(req, res, next) {
+    daoEspecie.findIndividuoByEspecie(req.params.id, (error, especie) => {
+      if (error) {
+        res.json(error);
+        res.status(400);
+      } else {
+        res.json(especie);
+        res.status(200);
+      }
+    });
+  }
 
   static addEspecie(req, res, next) {
    

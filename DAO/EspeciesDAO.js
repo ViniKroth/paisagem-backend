@@ -1,7 +1,8 @@
 const constants = require("../config/contants");
 const db = require("../models/index");
 const nomesPopularesDAO = require('./nomesPopularesDAO');
-
+const sequelize = require("sequelize");
+const Op = sequelize.op;
 const especies = db.sequelize.model("Especies");
 const individuos = db.sequelize.model("individuos");
 const nomesPopulares = db.sequelize.model("nomesPopulares");
@@ -134,7 +135,7 @@ function addEspecie( especie, callback) {
 }
 
 function addIndividuo(individuo, callback){
-  console.log (individuo)
+  
   individuos.create(individuo)
   .then(newIndividuo => {
       delete newIndividuo.dataValues.password
@@ -158,6 +159,26 @@ function addIndividuo(individuo, callback){
       callback(errorObj, null)
   })
 }
+
+
+function findIndividuoByEspecie(id_especie, callback) {
+  individuos
+    .findAll({
+      where: { id_especie: { [Op.like]: "%" + id_especie + "%" } }
+    })
+    .then(individuosEspecie => {
+      callback(null, individuosEspecie);
+    })
+    .catch(error => {
+      let errorObj = {
+        statusDesc: error,
+        statusCode: constants.errorCodeSequelize
+      };
+      callback(errorObj, null);
+    });
+}
+
+
 
 function updateEspecie(newEspecieData, callback) {
   especies
@@ -245,3 +266,4 @@ module.exports.findByNomeCientifico = findByNomeCientifico;
 module.exports.addEspecie = addEspecie;
 module.exports.deleteEspecieBy = deleteEspecieBy;
 module.exports.updateEspecie = updateEspecie;
+module.exports.findIndividuoByEspecie = findIndividuoByEspecie;
