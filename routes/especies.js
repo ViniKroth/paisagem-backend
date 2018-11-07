@@ -5,6 +5,14 @@ const especieController = require("../Controllers/EspecieController");
 const routerEspecie = express.Router();
 
 routerEspecie.post("/", especieController.addEspecie);
+routerEspecie.post("/cadastro/individuo", especieController.addIndividuo);
+routerEspecie.post("/individuo", especieController.addIndividuo);
+
+routerEspecie.get("/individuo/:id", (req, res) => {
+  especieController.findIndividuoByEspecie(req, res);
+});
+
+
 
 routerEspecie.get("/:id", (req, res) => {
   especieController.getEspecieByID(req, res);
