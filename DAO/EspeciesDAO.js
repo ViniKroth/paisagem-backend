@@ -2,11 +2,12 @@ const constants = require("../config/contants");
 const db = require("../models/index");
 const nomesPopularesDAO = require('./nomesPopularesDAO');
 const sequelize = require("sequelize");
-const Op = sequelize.op;
+
 const especies = db.sequelize.model("Especies");
 const individuos = db.sequelize.model("individuos");
 const nomesPopulares = db.sequelize.model("nomesPopulares");
 const imagensIndividuosDAO  = require('./imagensIndividuosDAO');
+const Op = sequelize.op;
 
 /*
  * Fetch a specific especies page
@@ -164,7 +165,7 @@ function addIndividuo(individuo, callback){
 function findIndividuoByEspecie(id_especie, callback) {
   individuos
     .findAll({
-      where: { id_especie: { [Op.like]: "%" + id_especie + "%" } }
+      where: { id_especie: id_especie  }
     })
     .then(individuosEspecie => {
       callback(null, individuosEspecie);
