@@ -2,18 +2,15 @@
 
 version: '2'
 services:
-  paisagem-db:
-    container_name: paisagem-db
-    image: mysql:5.6
-    expose:
-      - "3306"
-    ports:
-      - "3309:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=senha
-      - MYSQL_DATABASE=ages-paisagem
-    volumes:
-     - /vol/ages-paisagem:/var/lib/mysql
+    pfdb:
+       container_name: pfdb
+       image: 'mongo'
+       ports:
+         - "27018:27017"
+       volumes:
+         - /vol/pfdb/:/data/db
+       networks:
+         - pf-network
 
   paisagem-api:
     container_name: paisagem-api
