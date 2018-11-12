@@ -6,6 +6,7 @@ const sequelize = require("sequelize");
 const especies = db.sequelize.model("Especies");
 const individuos = db.sequelize.model("individuos");
 const nomesPopulares = db.sequelize.model("nomesPopulares");
+const imagensIndividuos = db.sequelize.model("imagensIndividuos");
 const imagensIndividuosDAO  = require('./imagensIndividuosDAO');
 const Op = sequelize.op;
 
@@ -143,14 +144,12 @@ function addIndividuo(individuo, callback){
       delete newIndividuo.dataValues.salt
       
       callback(null, newIndividuo);
-      if(individuo.imagens){
-        
+      if(individuo.imagens){        
         for(let i = 0; i < individuo.imagens.length; i++){
           let imagem = {
             id_individuo: newIndividuo.id_individuo,
             path: individuo.imagens[i]
           }
-
           imagensIndividuosDAO.addImagem(imagem, null);
         }
       }
@@ -165,6 +164,7 @@ function addIndividuo(individuo, callback){
 function findIndividuoByEspecie(id_especie, callback) {
   individuos
     .findAll({
+      
       where: { id_especie: id_especie  }
     })
     .then(individuosEspecie => {

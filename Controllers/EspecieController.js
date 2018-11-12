@@ -1,4 +1,5 @@
 const daoEspecie = require("../DAO/EspeciesDAO");
+const imagensIndividuosDAO = require("../DAO/imagensIndividuosDAO");
 
 class EspecieController {
   /*  ROTAS DE FETCH:
@@ -25,7 +26,17 @@ class EspecieController {
     });
   }
   
-
+  static getImageByIndividuos(req, res, next) {
+    imagensIndividuosDAO.findByIndividuo(req.params.id, (error, image) => {
+      if (error) {
+        res.json(error);
+        res.status(400);
+      } else {
+        res.json(image);
+        res.status(200);
+      }
+    });
+  }
   static findIndividuoByEspecie(req, res, next) {
     daoEspecie.findIndividuoByEspecie(req.params.id, (error, especie) => {
       if (error) {
