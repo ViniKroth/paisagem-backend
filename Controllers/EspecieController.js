@@ -1,4 +1,5 @@
 const daoEspecie = require("../DAO/EspeciesDAO");
+const imagensIndividuosDAO = require("../DAO/imagensIndividuosDAO");
 
 class EspecieController {
   /*  ROTAS DE FETCH:
@@ -24,6 +25,29 @@ class EspecieController {
       }
     });
   }
+  
+  static getImageByIndividuos(req, res, next) {
+    imagensIndividuosDAO.findByIndividuo(req.params.id, (error, image) => {
+      if (error) {
+        res.json(error);
+        res.status(400);
+      } else {
+        res.json(image);
+        res.status(200);
+      }
+    });
+  }
+  static findIndividuoByEspecie(req, res, next) {
+    daoEspecie.findIndividuoByEspecie(req.params.id, (error, especie) => {
+      if (error) {
+        res.json(error);
+        res.status(400);
+      } else {
+        res.json(especie);
+        res.status(200);
+      }
+    });
+  }
 
   static addEspecie(req, res, next) {
    
@@ -36,6 +60,18 @@ class EspecieController {
         res.status(200);
       }
     });
+  }
+
+  static addIndividuo(req, res, next){
+    daoEspecie.addIndividuo(req.body, (error, individuo) => {
+      if(error) {
+        res.json(error);
+        res.status(400);
+      } else {
+        res.json(individuo);
+        res.status(200);
+      }
+    })
   }
 
   static constructOrderQuery(query) {
@@ -78,6 +114,8 @@ class EspecieController {
 
     return whereQuery;
   }
+
+  
 }
 
 module.exports = EspecieController;
