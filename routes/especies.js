@@ -12,6 +12,9 @@ routerEspecie.get("/individuo/:id", (req, res) => {
   especieController.findIndividuoByEspecie(req, res);
 });
 
+routerEspecie.get("/individuo/imagens/:id", (req, res) => {
+  especieController.getImageByIndividuos(req, res);
+});
 
 
 routerEspecie.get("/:id", (req, res) => {

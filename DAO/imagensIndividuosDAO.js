@@ -46,8 +46,10 @@ function findByID(id_individuo, callback) {
 
   function findByIndividuo(id_individuo, callback) {
     imagensIndividuos
-      .findById(id_individuo, {
-        attributes: {}
+      .findAll({
+        where: {
+          id_individuo: id_individuo
+        }
       })
       .then(imagem => {
         if (imagem) {
