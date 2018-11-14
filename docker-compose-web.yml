@@ -1,0 +1,13 @@
+# How to run:
+
+version: '2'
+services:
+  paisagem-web:
+    container_name: paisagem-web
+    build:
+      context: .
+      dockerfile: Dockerfile_web
+    image: paisagem-web:latest
+    ports:
+      - "4500:80"
+      - "443:443"
