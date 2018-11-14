@@ -2,15 +2,15 @@
 
 version: '2'
 services:
-    pfdb:
-       container_name: pfdb
-       image: 'mongo'
-       ports:
-         - "27018:27017"
-       volumes:
-         - /vol/pfdb/:/data/db
-       networks:
-         - pf-network
+  pfdb:
+    container_name: pfdb
+    image: 'mongo'
+    ports:
+      - "27018:27017"
+    volumes:
+      - /vol/pfdb/:/data/db
+    networks:
+      - pf-network
 
   paisagem-api:
     container_name: paisagem-api
