@@ -13,7 +13,6 @@ services:
       MYSQL_ROOT_PASSWORD: "senha"
       MYSQL_DATABASE: "ages-paisagem"
 
-
   paisagem-api:
     container_name: paisagem-api
     build:
@@ -29,3 +28,8 @@ services:
     environment:
       - NODE_ENV=production
     command: ["./wait-for-it.sh", "-t", "0", "paisagem-db:3306", "--", "npm","start", ]
+   networks:
+    - pf-network
+
+networks:
+  pf-network:

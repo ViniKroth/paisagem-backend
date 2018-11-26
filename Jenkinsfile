@@ -4,17 +4,17 @@ node {
 
     try {
 
-        stage('Delete Repos Dietoterapia'){
+        stage('Delete Repositories Paisagem'){
             sh 'ssh root@10.32.223.4 -p 5439 "rm -rf /opt/docker/paisagem/api"'
             sh 'ssh root@10.32.223.4 -p 5439 "rm -rf /opt/docker/paisagem/web"'
         }
 
-        stage('Clone Repos Dietoterapia Front e Bach'){
+        stage('Clone Repos Paisagem Front e Bach'){
            sh 'ssh root@10.32.223.4 -p 5439 "git clone --depth 1 --branch homo http://projetos@www.tools.ages.pucrs.br/paisagem/api.git /opt/docker/paisagem/api"'
            sh 'ssh root@10.32.223.4 -p 5439 "git clone --depth 1 --branch homo http://projetos@www.tools.ages.pucrs.br/paisagem/web.git /opt/docker/paisagem/web"'
         }
 
-        stage('Install and Build Dietoterapia Front Angular'){
+        stage('Install and Build Paisagem Front Angular'){
             sh 'ssh root@10.32.223.4 -p 5439 "/opt/docker/paisagem/ic.sh"'
         }
 

@@ -11,3 +11,8 @@ services:
     ports:
       - "4500:80"
       - "443:443"
+    networks:
+      - pf-network
+
+networks:
+  pf-network:
