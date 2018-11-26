@@ -12,18 +12,23 @@ services:
        networks:
          - pf-network
 
-  paisagem-api:
-    container_name: paisagem-api
-    build:
-      context: .
-      dockerfile: Dockerfile_api
-    image: paisagem-api:latest
-    depends_on:
-      - "paisagem-db"
-    expose:
-      - "4000"
-    ports:
-      - "4501:4000"
-    environment:
-      - NODE_ENV=production
-    command: ["./wait-for-it.sh", "-t", "0", "paisagem-db:3306", "--", "npm","start", ]
+    paisagem-api:
+      container_name: paisagem-api
+      build:
+        context: .
+        dockerfile: Dockerfile_api
+      image: paisagem-api:latest
+      depends_on:
+        - "paisagem-db"
+      expose:
+        - "4000"
+      ports:
+        - "4501:4000"
+      environment:
+        - NODE_ENV=production
+      command: ["./wait-for-it.sh", "-t", "0", "paisagem-db:3306", "--", "npm","start", ]
+     networks:
+      - pf-network
+
+networks:
+  pf-network:
