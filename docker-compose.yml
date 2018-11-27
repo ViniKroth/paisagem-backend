@@ -30,8 +30,8 @@ services:
     environment:
       - NODE_ENV=production
     command: ["./wait-for-it.sh", "-t", "0", "paisagem-db:3306", "--", "npm","start", ]
-   networks:
-    - paisagem-network
+    networks:
+      - paisagem-network
 
 networks:
   paisagem-network:
