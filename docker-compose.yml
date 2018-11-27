@@ -22,7 +22,7 @@ services:
       dockerfile: Dockerfile_api
     image: paisagem-api:latest
     depends_on:
-      - "paisagem-db"
+      - "paisagemdb"
     expose:
       - "4000"
     ports:
