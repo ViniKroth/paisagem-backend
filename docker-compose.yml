@@ -3,7 +3,7 @@
 version: '2'
 services:
   paisagemdb:
-    container_name: paisagem-db
+    container_name: paisagemdb
     image: 'mysql:5.7'
     ports:
       - "3309:3306"
@@ -16,7 +16,7 @@ services:
       - paisagem-network
 
   paisagemapi:
-    container_name: paisagem-api
+    container_name: paisagemapi
     build:
       context: .
       dockerfile: Dockerfile_api

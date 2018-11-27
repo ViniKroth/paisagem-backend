@@ -3,7 +3,7 @@
 version: '2'
 services:
   paisagemweb:
-    container_name: paisagem-web
+    container_name: paisagemweb
     build:
       context: .
       dockerfile: Dockerfile_web
