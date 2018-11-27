@@ -2,7 +2,7 @@
 
 version: '2'
 services:
-  paisagem-web:
+  paisagemweb:
     container_name: paisagem-web
     build:
       context: .
