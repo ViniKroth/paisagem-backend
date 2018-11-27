@@ -10,14 +10,14 @@
     "username": "root",
     "password": "senha",
     "database": "ages-paisagem",
-    "host": "paisagem-db",
+    "host": "paisagemdb",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": "senha",
     "database": "ages-paisagem",
-    "host": "paisagem-db",
+    "host": "paisagemdb",
     "dialect": "mysql"
   }
 }
