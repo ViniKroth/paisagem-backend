@@ -4,7 +4,7 @@ node {
 
     try {
 
-        stage('Delete Repo Paisagem'){
+        stage('Delete Repos Paisagem'){
             sh 'ssh root@10.32.223.4 -p 5439 "rm -rf /opt/docker/paisagem/api"'
             sh 'ssh root@10.32.223.4 -p 5439 "rm -rf /opt/docker/paisagem/web"'
         }
