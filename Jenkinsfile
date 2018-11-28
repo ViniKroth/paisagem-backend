@@ -10,8 +10,8 @@ node {
         }
 
         stage('Clone Repos Paisagem Front e Bach'){
-           sh 'ssh root@10.32.223.4 -p 5439 "git clone --depth 1 --branch homo http://projetos@www.tools.ages.pucrs.br/paisagem/api.git /opt/docker/paisagem/api"'
-           sh 'ssh root@10.32.223.4 -p 5439 "git clone --depth 1 --branch homo http://projetos@www.tools.ages.pucrs.br/paisagem/web.git /opt/docker/paisagem/web"'
+           sh 'ssh root@10.32.223.4 -p 5439 "git clone --depth 1 --branch integracao http://projetos@www.tools.ages.pucrs.br/paisagem/api.git /opt/docker/paisagem/api"'
+           sh 'ssh root@10.32.223.4 -p 5439 "git clone --depth 1 --branch integracao http://projetos@www.tools.ages.pucrs.br/paisagem/web.git /opt/docker/paisagem/web"'
         }
 
         stage('Install and Build Paisagem Front Angular'){
