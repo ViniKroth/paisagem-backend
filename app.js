@@ -14,19 +14,18 @@ const nomesPopularesRouter = require("./routes/nomesPopulares");
 const familiasRouter = require("./routes/familias");
 const TokenManager = require("./Helpers/AuthManager");
 
-const ssl_certificate = fs.readFileSync( 'server.crt' );
-const ssl_certificate_key = fs.readFileSync( 'server.key' );
-const ssl_password = 'paisagem';
+
 
 const credentials = {
-    key: ssl_certificate,
-    cert: ssl_certificate_key,
-    passphrase: ssl_password
+    key: fs.readFileSync( 'server.key' ),
+    cert: fs.readFileSync( 'server.crt' ),
+    passphrase:'paisagem'
 };
 
 // Initialize server
 models.sequelize.sync().then(function() {
-  models.Users.create({
+/*
+models.Users.create({
     "username":"admin",
     "senha":"8c9a812879a9324b5becada806b85389685944212118971e8ff1507d74af67ed",
     "salt":"34df78b35c833deade9fd2e77db5341a27252206f46d0aeb065673e2529a0576",
@@ -88,7 +87,7 @@ models.sequelize.sync().then(function() {
    })
    models.Familias.create({
     "nome": "Verbenaceae"
-   })
+   })*/
   setupServer();
 });
 
