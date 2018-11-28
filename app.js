@@ -14,7 +14,7 @@ const nomesPopularesRouter = require("./routes/nomesPopulares");
 const familiasRouter = require("./routes/familias");
 const TokenManager = require("./Helpers/AuthManager");
 
-const ssl_certificate = fs.readFileSync( 'server.ctr' );
+const ssl_certificate = fs.readFileSync( 'server.crt' );
 const ssl_certificate_key = fs.readFileSync( 'server.key' );
 const ssl_password = 'paisagem';
 
