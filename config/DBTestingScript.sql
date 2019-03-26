@@ -1,6 +1,6 @@
-CREATE DATABASE `ages-paisagem`;
+CREATE DATABASE `ages_paisagem`;
 
-INSERT INTO `ages-paisagem`.`Users` (`name`, `username`, `email`, `password`, `salt`, `createdAt`,  `updatedAt`)
+INSERT INTO `ages_paisagem`.`Users` (`nome`, `username`, `email`, `senha`, `salt`, `createdAt`,  `updatedAt`)
   VALUES (
     'Usuário de Teste',
     'usuario',

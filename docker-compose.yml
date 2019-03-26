@@ -8,10 +8,10 @@ services:
     ports:
       - "3310:3306"
     volumes:
-      - /vol/ages-paisagem/db:/var/lib/mysql:rw
+      - /vol/ages_paisagem/db:/var/lib/mysql:rw
     environment:
       MYSQL_ROOT_PASSWORD: "senha"
-      MYSQL_DATABASE: "ages-paisagem"
+      MYSQL_DATABASE: "ages_paisagem"
     networks:
       - paisagem-network
 
