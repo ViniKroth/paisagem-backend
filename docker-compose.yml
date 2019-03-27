@@ -26,7 +26,7 @@ services:
     expose:
       - "4000"
     ports:
-      - "4501:4000"
+      - "4503:4000"
     environment:
       - NODE_ENV=production
     command: ["./wait-for-it.sh", "-t", "0", "paisagemdb:3306", "--", "npm","start", ]

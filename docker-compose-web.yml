@@ -9,7 +9,7 @@ services:
       dockerfile: Dockerfile_web
     image: paisagem-web:latest
     ports:
-      - "4500:80"
+      - "4503:80"
       - "443:443"
     networks:
       - paisagem-network

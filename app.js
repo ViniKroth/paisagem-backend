@@ -112,7 +112,7 @@ function setupServer() {
     });
   
   })
-  app.listen(process.env.port || 4000, function() {
-    console.log("server listening");
+  app.listen(process.env.port || 4503, function() {
+    console.log("server listening on por 4503");
   });
 }
